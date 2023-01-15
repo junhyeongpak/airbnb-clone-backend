@@ -45,10 +45,10 @@ class RoomDetailSerializer(ModelSerializer):
     owner = TinyUserSerializer(
         read_only=True,
     )  # read_only = True -> serializer는 owner에 대한 정보 요구x
-    amenities = AmenitySerializer(
-        read_only=True,
-        many=True,
-    )
+    # amenities = AmenitySerializer(
+    #     read_only=True,
+    #     many=True,
+    # )
     category = CategorySerializer(
         read_only=True,
     )
@@ -57,7 +57,8 @@ class RoomDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Room
-        fields = "__all__"
+        exclude = ("amenities",)
+        # fields = "__all__"
 
     def get_rating(self, room):  # 반드시 get_ 을 붙여야 함
         return room.rating()
