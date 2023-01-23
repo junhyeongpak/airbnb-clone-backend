@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import static
+from django.conf.urls.static import static
 from django.conf import settings
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/rooms/", include("rooms.urls")),
     path("api/v1/categories/", include("categories.urls")),
     path("api/v1/experiences/", include("experiences.urls")),
-] + static(settings.MEDIA_URL)
+    path("api/v1/medias/", include("medias.urls")),
+    path("api/v1/wishlists/", include("wishlists.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# MEDIA_URL은 파일을 노출하는 방법이고, MEDIA_ROOT는 파일이 실제로
+# 있는 위치가 된다.
